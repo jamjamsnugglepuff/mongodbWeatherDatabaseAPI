@@ -27,11 +27,11 @@ Route::middleware('auth:api')->group(function(){
     // create a weather report
     Route::post('/weather_report/create', [WeatherReportController::class, 'create']);
     // PUT update weather report
-    Route::put('/weather_report/{id}', [WeatherReportController::class, 'updateByPut']);
+    Route::put('/weather_report/update', [WeatherReportController::class, 'updateByPut']);
     // PATCH update weather report
-    Route::patch('/weather_report/{id}', [WeatherReportController::class, 'updateByPatch']);
+    Route::patch('/weather_report/update', [WeatherReportController::class, 'updateByPatch']);
     // DELETE weather report
-    Route::delete('/weather_report/{id}', [WeatherReportController::class, 'delete']);
+    Route::delete('/weather_report/delete', [WeatherReportController::class, 'delete']);
 });
 
 

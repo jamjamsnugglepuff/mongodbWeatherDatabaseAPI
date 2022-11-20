@@ -41,7 +41,7 @@ class Builder extends BaseBuilder
      *
      * @var int
      */
-    public $timeout;
+    public $timeout = 1000;
 
     /**
      * The cursor hint value.

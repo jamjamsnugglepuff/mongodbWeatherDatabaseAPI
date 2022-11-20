@@ -59,12 +59,13 @@ class WeatherReportController extends Controller
 
         // get weather report json data
         $data = json_decode($request->getContent(), true);
-
+        
         foreach($data as $weatherReport){
             try{
-                $weatherReport = (object) $weatherReport;  
-                $id =  WeatherReport::putReports($data);
-                $inserted_report_ids[] = $id;
+                $weatherReport = (object) $weatherReport;
+                // return var_dump($weatherReport->oid);  
+                $id =  WeatherReport::putReports($weatherReport);
+                $putted_report_ids[] = $id;
             }catch(Exception $e){
                 return 'error updating PUT reports';
             }
@@ -75,20 +76,21 @@ class WeatherReportController extends Controller
 
     public function updateByPatch(Request $request){
         /**
-         * update weather reports from json data PATCH METHOD
+         * update weather reports from json data PUT METHOD
          */
         $patched_report_ids = [];
 
         // get weather report json data
         $data = json_decode($request->getContent(), true);
-
+        
         foreach($data as $weatherReport){
             try{
-                $weatherReport = (object) $weatherReport;  
-                $id =  WeatherReport::patchReports($data);
+                $weatherReport = (object) $weatherReport;
+                // return var_dump($weatherReport->oid);  
+                $id =  WeatherReport::patchReports($weatherReport);
                 $patched_report_ids[] = $id;
             }catch(Exception $e){
-                return 'error updating PATCH reports';
+                return 'error updating PUT reports';
             }
         }
 
@@ -107,7 +109,7 @@ class WeatherReportController extends Controller
         foreach($data as $weatherReport){
             try{
                 $weatherReport = (object) $weatherReport;  
-                $id =  WeatherReport::deleteReports($data);
+                $id =  WeatherReport::deleteReports($weatherReport);
                 $deleted_report_ids[] = $id;
             }catch(Exception $e){
                 return 'error deleting reports';

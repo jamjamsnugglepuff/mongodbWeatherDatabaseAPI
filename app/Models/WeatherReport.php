@@ -54,15 +54,31 @@ class WeatherReport extends Model
         ]);
     }
 
-    public static function putReports($weatherReports){
+    public static function putReports($weatherReport){
+        $report_to_update =  WeatherReport::where('_id', $weatherReport->oid)->first();
         
+        foreach (get_object_vars($weatherReport) as $key => $value) {
+            $report_to_update->$key = $value;
+        }
+
+        $report_to_update->save();
+
+        return $report_to_update->oid;
     }
 
-    public static function patchReports($weatherReports){
+    public static function patchReports($weatherReport){
+        $report_to_update =  WeatherReport::where('_id', $weatherReport->oid)->first();
+        
+        foreach (get_object_vars($weatherReport) as $key => $value) {
+            $report_to_update->$key = $value;
+        }
 
+        $report_to_update->save();
+
+        return $report_to_update->oid;
     }
 
-    public static function deleteReports($report_ids){
-
+    public static function deleteReports($weatherReport){
+        WeatherReport::where('_id', $weatherReport->oid)->first()->delete();
     }
 }
