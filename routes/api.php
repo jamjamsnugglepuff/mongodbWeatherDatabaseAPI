@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\WeatherReportController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,6 +14,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+
+
+
+Route::middleware('auth:api')->group(function(){
+
+
+    // get a weather report
+    Route::get('/weather_report', [WeatherReportController::class, 'get']);
+    // get weather reports of station id
+    Route::get('/weather_report/station/{id}', [WeatherReportController::class, 'getStationReports']);
+    // create a weather report
+    Route::post('/weather_report/create', [WeatherReportController::class, 'create']);
+    // PUT update weather report
+    Route::put('/weather_report/{id}', [WeatherReportController::class, 'updateByPut']);
+    // PATCH update weather report
+    Route::patch('/weather_report/{id}', [WeatherReportController::class, 'updateByPatch']);
+    // DELETE weather report
+    Route::delete('/weather_report/{id}', [WeatherReportController::class, 'delete']);
 });
+
+
