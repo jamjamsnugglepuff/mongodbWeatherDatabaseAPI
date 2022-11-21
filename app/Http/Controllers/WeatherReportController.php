@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\WeatherReport;
-
-
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Auth;
 
 class WeatherReportController extends Controller
 {
@@ -13,6 +13,13 @@ class WeatherReportController extends Controller
         /**
          * get weather reports based on ids input
          */
+
+        $user = Auth::user();
+
+        if(Gate::allows('authorized', $user)){
+            return 'user not authorized to access api';
+        }
+
          $ids = explode(',', $request->ids);
 
         try{
@@ -26,6 +33,13 @@ class WeatherReportController extends Controller
         /**
          * get stations weather reports
          */
+
+        $user = Auth::user();
+
+        if(!Gate::allows('authorized', $user)){
+            return 'user not authorized to access api';
+        }
+
         try{    
             return WeatherReport::getStationReports($station_id);
         }catch(Exception $e){
@@ -37,6 +51,13 @@ class WeatherReportController extends Controller
         /**
          * create weather reports from json data
          */
+
+        $user = Auth::user();
+
+        if(!Gate::allows('authorized', $user)){
+            return 'user not authorized to access api';
+        }
+
         $inserted_report_ids = [];
 
         // get weather report json data
@@ -59,6 +80,13 @@ class WeatherReportController extends Controller
         /**
          * update weather reports from json data PUT METHOD
          */
+        $user = Auth::user();
+        
+        if(!Gate::allows('authorized', $user)){
+            return 'user not authorized to access api';
+        }
+
+
         $putted_report_ids = [];
 
         // get weather report json data
@@ -82,6 +110,13 @@ class WeatherReportController extends Controller
         /**
          * update weather reports from json data PUT METHOD
          */
+
+        $user = Auth::user();
+
+        if(!Gate::allows('authorized', $user)){
+            return 'user not authorized to access api';
+        }
+
         $patched_report_ids = [];
 
         // get weather report json data
@@ -105,6 +140,13 @@ class WeatherReportController extends Controller
         /**
          * delete weather reports from json data
          */
+
+        $user = Auth::user();
+
+        if(!Gate::allows('authorized', $user)){
+            return 'user not authorized to access api';
+        }
+
         $deleted_report_ids = [];
 
         // get weather report json data
