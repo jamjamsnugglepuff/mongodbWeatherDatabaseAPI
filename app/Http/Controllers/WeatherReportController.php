@@ -10,6 +10,9 @@ use App\Models\WeatherReport;
 class WeatherReportController extends Controller
 {
     public function get(Request $request){
+        /**
+         * get weather reports based on ids input
+         */
          $ids = explode(',', $request->ids);
 
         try{
@@ -20,6 +23,9 @@ class WeatherReportController extends Controller
     }
 
     public function getStationReports($station_id){
+        /**
+         * get stations weather reports
+         */
         try{    
             return WeatherReport::getStationReports($station_id);
         }catch(Exception $e){
@@ -47,8 +53,6 @@ class WeatherReportController extends Controller
         }
 
         return $inserted_report_ids;
-        
-        
     }
 
     public function updateByPut(Request $request){

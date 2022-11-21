@@ -18,8 +18,6 @@ use App\Http\Controllers\WeatherReportController;
 
 
 Route::middleware('auth:api')->group(function(){
-
-
     // get a weather report
     Route::get('/weather_report', [WeatherReportController::class, 'get']);
     // get weather reports of station id
